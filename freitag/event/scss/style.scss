@@ -2,34 +2,77 @@
 
 .head{
     width:100%;
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
+    z-index:100;
+    background:rgba(0, 29, 58, 0.18);
+    backdrop-filter:blur(2px);
     &__wrap{
         width:calc(100% - 40px);
         max-width:1200px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
         margin:0 auto;
         padding:10px 0;
+        &--link{
+            font-size:0;
+            a{
+                font-size:16px;
+                color:#fff;
+                & + a{
+                    margin-left:8px;
+                }
+            }
+        }
     }    
 }
 
 .event{
     &__cont{
         min-height:100vh;
-        border:1px solid #111;
+        >div{
+            width:100%;
+            min-height:100vh;
+            border:1px solid #111;
+        }
     }
     &__top{
-        &--video{
-            width:100%;
+        position:relative;
+        border:0 !important;
+        &--canvas{
             height:100vh;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background-color:#111;
-            .video{
-                font-size:80px;
-                font-family:$f-ebold;
-                color:#fff;
+            position:fixed;
+            top:0;
+            left:0;
+        }
+        &--tit{
+            width:100%;
+            font-size:0;
+            font-family:$f-ebold;
+            text-align:center;
+            color:#111;
+            position:absolute;
+            top:45%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            li{
+                display:inline-block;
+                vertical-align:middle;
+                font-size:65px;
+                // &:first-child{
+                //     font-size:0;
+                //     span{
+                //         font-size:65px;
+                //         & + span{
+                //             padding-left:15px;
+                //         }
+                //     }
+                // }
+                & + li{
+                    padding-left:15px;
+                }
             }
         }
     }

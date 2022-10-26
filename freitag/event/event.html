@@ -13,32 +13,53 @@
 <body>
     <header class="head">
         <div class="head__wrap">
-            <a class="fr-logo" href="javascript:void(0)">FREITAG</a>
+            <a class="fr-logo" href="javascript:void(0)">
+                <h1>FREITAG</h1>
+            </a>
+            <nav class="head__wrap--link">
+                <a href="javascript:void(0)">RESUME</a>
+                <a href="javascript:void(0)">NOTION</a>
+                <a href="javascript:void(0)">HOME</a>
+            </nav>
         </div>
     </header>
 
-    <div class="event">
-        <section class="event__cont">
+    <div class="event" id="">
+        <section class="event__cont" id="sec--0">
             <div class="event__top">
-                <div class="event__top--video">
-                    <p class="video">FREITAG</p>
-                    <!-- 도로 위 트럭 방수포가 어깨 위 가방으로, '프라이탁(FREITAG)' -->
-                    <!-- <video src=""></video> -->
+                <div class="event__top--wrap">
+                    <div class="event__top--canvas">
+                        <canvas id="canvas--tape" width="1280" height="720"></canvas>
+                    </div>
+
+                    <!-- <ul class="event__top--tit">
+                        <li>
+                            <span>버려진</span>
+                            <span>방수포를</span>
+                        </li>
+                        <li>트럭의</li>
+                        <li>방수포를</li>
+                        <li>나만의</li>
+                        <li>하나뿐인</li>
+                        <li>가방으로</li>
+                        <li>트럭 방수포가 어깨 위 가방으로</li>
+                    </ul> -->
+
                 </div>
-                <p>로고영상(mp4)</p>
+                <!-- <p>로고영상(mp4)</p>
                 <p>트럭영상(scroll)</p>
-                <p>소개멘트</p>
+                <p>소개멘트</p> -->
             </div>
         </section>
 
-        <section class="event__cont">
+        <section class="event__cont" id="sec--1">
             <div class="">
                 <p>제작과정</p>
                 <p>제단,세탁,디자인(scroll)</p>
             </div>
         </section>
 
-        <section class="event__cont">
+        <section class="event__cont" id="sec--2">
             <div class="">
                 <p>가방종류</p>
                 <p>드라그넷 영상(scroll)</p>
@@ -46,7 +67,7 @@
             </div>
         </section>
 
-        <section class="event__cont">
+        <section class="event__cont" id="sec--3">
             <div class="">
                 <p>나만의 색상</p>
                 <p>마이애미 영상(scroll)</p>
@@ -54,40 +75,21 @@
             </div>
         </section>
 
-        <section class="event__cont">
+        <section class="event__cont" id="sec--4">
             <div class="">
                 <p>유튜브 영상</p>
                 <p>ZIPPELIN 영상</p>
             </div>
         </section>
 
-        <section class="event__cont">
+        <section class="event__cont" id="sec--5">
             <div class="">
                 <p>매장소개</p>
             </div>
         </section>
-
-        <!-- https://eyesmag.com/posts/135866/freitag-atoz
-        프라이탁 회사소개
-
-
-        >프라이탁 소개 (normal)
-        https://www.youtube.com/watch?v=eAAullLgmC0
-
-        >제작과정 (scroll)
-        https://www.youtube.com/watch?v=mtalH9vL0Xo
-        
-
-        >가방종류 (scroll)
-        https://www.youtube.com/watch?v=x8OQw8gptGc
-
-        >다양한 색상 (scroll)
-
-        >유튜브 동영상 (normal)
-
-        >프라이탁 국내 매장 (normal) -->
-
     </div>
+
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
