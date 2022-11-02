@@ -12,7 +12,7 @@
     var sceneInfo = [
         { // 0
             type:'sticky',
-            heightNum:5, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            heightNum:7, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--0'),
@@ -21,20 +21,8 @@
                 videoImages: []
             },
             values: {
-                videoImageCount: 217, // 이미지가 217장
-                imageSequence: [0, 217], // 이미지 인덱스 
-                // msgA_opacity_in: [0, 1, { start: 0.05, end: 0.15 }],
-                // msgB_opacity_in: [0, 1, { start: 0.35, end: 0.45 }],
-                // msgC_opacity_in: [0, 1, { start: 0.65, end: 0.75 }],
-                // msgA_transY_in: [20, 0, { start: 0.05, end: 0.15 }],
-                // msgB_transY_in: [20, 0, { start: 0.35, end: 0.45 }],
-                // msgC_transY_in: [20, 0, { start: 0.65, end: 0.75 }],
-                // msgA_opacity_out: [1, 0, { start: 0.2, end: 0.3 }],
-                // msgB_opacity_out: [1, 0, { start: 0.5, end: 0.6 }],
-                // msgC_opacity_out: [1, 0, { start: 0.8, end: 0.9 }],
-                // msgA_transY_out: [0, -20, { start: 0.2, end: 0.3 }],
-                // msgB_transY_out: [0, -20, { start: 0.5, end: 0.6 }],
-                // msgC_transY_out: [0, -20, { start: 0.8, end: 0.9 }]
+                videoImageCount: 190, // 이미지가 190장
+                imageSequence: [0, 190], // 이미지 인덱스 
             }
         },
         { // 1
@@ -101,7 +89,7 @@
 
     function setCanvasImages() {
         let imgElem;
-        for (let i = 1; i < sceneInfo[0].values.videoImageCount; i++) {
+        for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image();
 
             imgElem.src = `./images/top/top-${i}.jpg`;
@@ -140,8 +128,8 @@
         var scrollRatio = currentYOffset / scrollHeight; //현재 섹션에서 스크롤 된 범위를 비율로 구하기
 
         if(values.length === 5){ // start ~ end 사이에 애니메인션 실행
-            var partScrollStart = values[2].start * scrollHeight;
-            var partScrollEnd = values[2].end * scrollHeight;
+            var partScrollStart = values[0].start * scrollHeight;
+            var partScrollEnd = values[4].end * scrollHeight;
             var partScrollHeight = partScrollEnd - partScrollStart;
 
             if(currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd){
