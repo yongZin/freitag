@@ -16,8 +16,8 @@
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--0'),
-                canvas: document.querySelector('#canvas--tape'),
-                context: document.querySelector('#canvas--tape').getContext('2d'),
+                canvas: document.querySelector('#top__canvas--tape'),
+                context: document.querySelector('#top__canvas--tape').getContext('2d'),
                 videoImages: []
             },
             values: {
