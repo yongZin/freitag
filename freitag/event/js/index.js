@@ -1,28 +1,32 @@
 (function () {
-    var container = document.querySelector('.event');
-    var yOffset = 0; //window.pageYOffset 변수(현재 스크롤값)
-    var prevScrollHeight = 0; //현재 스크롤 위치보다 이전에 위치한 스크롤 섹션들의 높이값의 합
-    var currentScene = 0; //현재 활성화된 씬(section)
-    var enterNewScene = false;//새로운 섹션이 시작되는 순간 true
+    let container = document.querySelector('.event');
+    let yOffset = 0; //window.pageYOffset 변수(현재 스크롤값)
+    let prevScrollHeight = 0; //현재 스크롤 위치보다 이전에 위치한 스크롤 섹션들의 높이값의 합
+    let currentScene = 0; //현재 활성화된 씬(section)
+    let enterNewScene = false;//새로운 섹션이 시작되는 순간 true
     let acc = 0.1;
     let delayedYOffset = 0;
     let rafId;
     let rafState;
 
-    var sceneInfo = [
+    const sceneInfo = [
         { // 0
             type:'sticky',
             heightNum:7, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--0'),
+                messageA:document.querySelector('top__msg--slide li:nth-child(1)'),
+                messageB:document.querySelector('top__msg--slide li:nth-child(2)'),
+                messageC:document.querySelector('top__msg--slide li:nth-child(3)'),
                 canvas: document.querySelector('#top__canvas--tape'),
                 context: document.querySelector('#top__canvas--tape').getContext('2d'),
                 videoImages: []
             },
             values: {
-                videoImageCount: 190, // 이미지가 190장
-                imageSequence: [0, 190], // 이미지 인덱스 
+                videoImageCount: 210, // 이미지가 210장
+                imageSequence: [0, 209, { start: 0, end: 0.85 }], // 이미지 인덱스 
+                canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
             }
         },
         { // 1
@@ -91,8 +95,8 @@
         let imgElem;
         for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image();
-
             imgElem.src = `./images/top/top-${i}.jpg`;
+
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
     }
@@ -120,17 +124,28 @@
             }
         }
         container.setAttribute('id', "scene-" + currentScene);
+
+        if(window.innerWidth < 1280){
+            const heightRatio = window.innerHeight / 720;
+
+            sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+        } else{
+            const heightRatio = window.innerWidth / 1280;
+
+            sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+        }
+        
     }
 
     function calcValues(values, currentYOffset){ // 현재 섹션에서의 스크롤 위치
-        var rv;
-        var scrollHeight = sceneInfo[currentScene].scrollHeight;
-        var scrollRatio = currentYOffset / scrollHeight; //현재 섹션에서 스크롤 된 범위를 비율로 구하기
+        let rv;
+        const scrollHeight = sceneInfo[currentScene].scrollHeight;
+        const scrollRatio = currentYOffset / scrollHeight; //현재 섹션에서 스크롤 된 범위를 비율로 구하기
 
-        if(values.length === 5){ // start ~ end 사이에 애니메인션 실행
-            var partScrollStart = values[0].start * scrollHeight;
-            var partScrollEnd = values[4].end * scrollHeight;
-            var partScrollHeight = partScrollEnd - partScrollStart;
+        if(values.length === 3){ // start ~ end 사이에 애니메인션 실행
+            const partScrollStart = values[2].start * scrollHeight;
+            const partScrollEnd = values[2].end * scrollHeight;
+            const partScrollHeight = partScrollEnd - partScrollStart;
 
             if(currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd){
                 rv = (currentYOffset - partScrollStart) / partScrollHeight * (values[1] - values[0]) + values[0]; // (이전 섹션 스크롤값 - 현재섹션 스크롤 시작값) / 현재섹션 총 스크롤 값 * 현재 섹션의 현재 스크롤 위치(비율)
@@ -154,12 +169,10 @@
         
         switch(currentScene){ //현재 섹션에게만 이벤트
             case 0:
-                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                // if(scrollRatio <= 1){
-                //     objs.background.style.opacity = calcValues(values.bg_opacity_out, currentYOffset);
-                //     objs.title.style.opacity = calcValues(values.bg_opacity_out, currentYOffset);
-                // }
+                // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+
+                objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
                 break;
 
             case 1:
@@ -203,10 +216,11 @@
         playAnimation();
     }
 
-    function loop() {
+    function loop() { //캔버스 이미지 드로우 부드럽게
         delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
-        if (!enterNewScene) {
-            if (currentScene === 0 || currentScene === 2) {
+
+        if (!enterNewScene) { //섹션 교차시점이 아닌 경우
+            if (currentScene === 0 || currentScene === 2) { //첫번째 세번째만 컨버스 이미지 드로우
                 const currentYOffset = delayedYOffset - prevScrollHeight;
                 const objs = sceneInfo[currentScene].objs;
                 const values = sceneInfo[currentScene].values;
@@ -228,12 +242,13 @@
     
     window.addEventListener('load', function(){
         setLayout();
-        sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+        sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0); //스크롤 하기전 로드후 캔버스 이미지 드로운
 
         let tempYOffset = yOffset;
         let tempScrollCount = 0;
         if (yOffset > 0) {
-            let siId = setInterval(() => {
+            let siId = setInterval(() => { //새로고침시 스크롤 강제실행(이미지오류)
 
                 window.scrollTo(0, tempYOffset);
                 tempYOffset += 1;
