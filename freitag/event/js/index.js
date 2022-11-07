@@ -16,9 +16,10 @@
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--0'),
-                messageA:document.querySelector('top__msg--slide li:nth-child(1)'),
-                messageB:document.querySelector('top__msg--slide li:nth-child(2)'),
-                messageC:document.querySelector('top__msg--slide li:nth-child(3)'),
+                msgT:document.querySelector('top__msg--tit'),
+                msgA:document.querySelector('top__msg--slide li:nth-child(1)'),
+                msgB:document.querySelector('top__msg--slide li:nth-child(2)'),
+                msgC:document.querySelector('top__msg--slide li:nth-child(3)'),
                 canvas: document.querySelector('#top__canvas--tape'),
                 context: document.querySelector('#top__canvas--tape').getContext('2d'),
                 videoImages: []
@@ -27,6 +28,7 @@
                 videoImageCount: 210, // 이미지가 210장
                 imageSequence: [0, 209, { start: 0, end: 0.85 }], // 이미지 인덱스 
                 canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
+                msgT: [1, 0, { start: 0.05, end: 0.15 }],
             }
         },
         { // 1
