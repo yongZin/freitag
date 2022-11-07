@@ -127,15 +127,18 @@
         }
         container.setAttribute('id', "scene-" + currentScene);
 
-        if(window.innerWidth < 1280){
-            const heightRatio = window.innerHeight / 720;
+        const heightRatio = window.innerHeight / 720;
+        sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
 
-            sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        } else{
-            const heightRatio = window.innerWidth / 1280;
+        // if(window.innerWidth < 1280){
+        //     const heightRatio = window.innerHeight / 720;
 
-            sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        }
+        //     sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+        // } else{
+        //     const heightRatio = window.innerWidth / 1280;
+
+        //     sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+        // }
         
     }
 
