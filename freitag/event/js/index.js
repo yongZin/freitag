@@ -16,81 +16,92 @@
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--0'),
-                msgT:document.querySelector('top__msg--tit'),
-                msgA:document.querySelector('top__msg--slide li:nth-child(1)'),
-                msgB:document.querySelector('top__msg--slide li:nth-child(2)'),
-                msgC:document.querySelector('top__msg--slide li:nth-child(3)'),
+                msgT:document.querySelector('.top__msg--tit'),
+                msgBox:document.querySelector('.top__msg--slide'),
+                msgA:document.querySelector('.top__msg--slide li:nth-child(1)'),
+                msgB:document.querySelector('.top__msg--slide li:nth-child(2)'),
+                msgC:document.querySelector('.top__msg--slide li:nth-child(3)'),
                 canvas: document.querySelector('#top__canvas--tape'),
                 context: document.querySelector('#top__canvas--tape').getContext('2d'),
                 videoImages: []
             },
             values: {
-                videoImageCount: 210, // 이미지가 210장
-                imageSequence: [0, 209, { start: 0, end: 0.85 }], // 이미지 인덱스 
-                canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
-                msgT: [1, 0, { start: 0.05, end: 0.15 }],
+                videoImageCount: 335, // 이미지가 335장
+                imageSequence: [0, 334, { start: 0, end: 0.8 }], // 이미지 인덱스 
+                canvas_opacity: [1, 0, { start: 0.93, end: 1 }],
+                msgT_opacity: [1, 0, { start: 0.1, end: 0.16 }],
+                msgA_opacity: [0, 1, { start: 0.16, end: 0.23 }],
+                msgB_opacity: [0, 1, { start: 0.38, end: 0.45 }],
+                msgC_opacity: [0, 1, { start: 0.60, end: 0.67 }],
+                msgA_trans: [30, 0, { start: 0.16, end: 0.23 }],
+                msgB_trans: [30, 0, { start: 0.38, end: 0.45 }],
+                msgC_trans: [30, 0, { start: 0.60, end: 0.67 }],
+                msgBox_trans_1: [280, 140, { start: 0.28, end: 0.33 }],
+                msgBox_trans_2: [140, 0, { start: 0.50, end: 0.55 }],
+                msgBox_trans_3: [0, 120, { start: 0.72, end: 0.77 }],
+                msgBox_opacity: [1, 0, { start: 0.8, end: 0.9 }],
             }
         },
-        { // 1
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--1'),
+        // { // 1
+        //     type:'normal',
+        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+        //     scrollHeight:0,
+        //     objs: {
+        //         container:document.querySelector('#sec--1'),
                 
-            },
-            values: {
+        //     },
+        //     values: {
                 
-            }
-        },
-        { // 2
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--2'),
+        //     }
+        // },
+        // { // 2
+        //     type:'normal',
+        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+        //     scrollHeight:0,
+        //     objs: {
+        //         container:document.querySelector('#sec--2'),
                 
-            },
-            values: {
+        //     },
+        //     values: {
                 
-            }
-        },
-        { // 3
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--3'),
+        //     }
+        // },
+        // { // 3
+        //     type:'normal',
+        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+        //     scrollHeight:0,
+        //     objs: {
+        //         container:document.querySelector('#sec--3'),
                 
-            },
-            values: {
+        //     },
+        //     values: {
                 
-            }
-        },
-        { // 4
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--4'),
+        //     }
+        // },
+        // { // 4
+        //     type:'normal',
+        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+        //     scrollHeight:0,
+        //     objs: {
+        //         container:document.querySelector('#sec--4'),
                 
-            },
-            values: {
+        //     },
+        //     values: {
                 
-            }
-        },
-        { // 5
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--5'),
+        //     }
+        // },
+        // { // 5
+        //     type:'normal',
+        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+        //     scrollHeight:0,
+        //     objs: {
+        //         container:document.querySelector('#sec--5'),
                 
-            },
-            values: {
+        //     },
+        //     values: {
                 
-            }
-        },
+        //     }
+        // },
     ];
 
     function setCanvasImages() {
@@ -127,18 +138,10 @@
         }
         container.setAttribute('id', "scene-" + currentScene);
 
+        const widthRatio = window.innerWidth / 1280;
         const heightRatio = window.innerHeight / 720;
-        sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
 
-        // if(window.innerWidth < 1280){
-        //     const heightRatio = window.innerHeight / 720;
-
-        //     sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        // } else{
-        //     const heightRatio = window.innerWidth / 1280;
-
-        //     sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        // }
+        sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio}, ${heightRatio})`;
         
     }
 
@@ -174,10 +177,31 @@
         
         switch(currentScene){ //현재 섹션에게만 이벤트
             case 0:
-                // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-
                 objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
+
+                objs.msgT.style.opacity = calcValues(values.msgT_opacity, currentYOffset);
+
+                objs.msgA.style.opacity = calcValues(values.msgA_opacity, currentYOffset);
+                objs.msgA.style.transform = `translateY(${calcValues(values.msgA_trans, currentYOffset)}px)`;
+                
+                objs.msgBox.style.transform = `translate(${calcValues(values.msgBox_trans_1, currentYOffset)}px, -50%)`;
+
+                objs.msgB.style.opacity = calcValues(values.msgB_opacity, currentYOffset);
+                objs.msgB.style.transform = `translateY(${calcValues(values.msgB_trans, currentYOffset)}px)`;
+
+                objs.msgC.style.opacity = calcValues(values.msgC_opacity, currentYOffset);
+                objs.msgC.style.transform = `translateY(${calcValues(values.msgC_trans, currentYOffset)}px)`;
+
+                if(scrollRatio >= 0.5){
+                    objs.msgBox.style.transform = `translate(${calcValues(values.msgBox_trans_2, currentYOffset)}px, -50%)`;
+                }
+
+                if(scrollRatio >= 0.7){   
+                    objs.msgBox.style.transform = `translate(0px, calc(-50% + ${calcValues(values.msgBox_trans_3, currentYOffset)}%))`;
+                    objs.msgBox.style.opacity = calcValues(values.msgBox_opacity, currentYOffset);
+                }
+
+                console.log(scrollRatio);
                 break;
 
             case 1:

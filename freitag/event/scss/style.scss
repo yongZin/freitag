@@ -30,6 +30,7 @@
 }
 
 .event{
+    height:800vh;
     &__cont{
         min-height:100vh;
         >div{
@@ -40,6 +41,7 @@
     }
     &__top{
         position:relative;
+        z-index: 1;
         border:0 !important;
         .top{
             &__canvas{
@@ -58,7 +60,7 @@
             &__msg{
                 &--tit{
                     width:100%;
-                    font-size:70px;
+                    font-size:90px;
                     font-family:$f-ebold;
                     text-align:center;
                     color:#fff;
@@ -78,7 +80,7 @@
                     li{
                         display:inline-block;
                         vertical-align:middle;
-                        font-size:70px;
+                        font-size:90px;
                         font-family:$f-ebold;
                         color:#fff;
                         opacity:0;
