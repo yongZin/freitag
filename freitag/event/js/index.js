@@ -42,66 +42,50 @@
                 msgBox_opacity: [1, 0, { start: 0.8, end: 0.9 }],
             }
         },
-        // { // 1
-        //     type:'normal',
-        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-        //     scrollHeight:0,
-        //     objs: {
-        //         container:document.querySelector('#sec--1'),
+        { // 1
+            type:'normal',
+            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            scrollHeight:0,
+            objs: {
+                container:document.querySelector('#sec--1'),
+            },
+        },
+        { // 2
+            type:'normal',
+            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            scrollHeight:0,
+            objs: {
+                container:document.querySelector('#sec--2'),
                 
-        //     },
-        //     values: {
+            },
+        },
+        { // 3
+            type:'normal',
+            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            scrollHeight:0,
+            objs: {
+                container:document.querySelector('#sec--3'),
                 
-        //     }
-        // },
-        // { // 2
-        //     type:'normal',
-        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-        //     scrollHeight:0,
-        //     objs: {
-        //         container:document.querySelector('#sec--2'),
+            },
+        },
+        { // 4
+            type:'normal',
+            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            scrollHeight:0,
+            objs: {
+                container:document.querySelector('#sec--4'),
                 
-        //     },
-        //     values: {
+            },
+        },
+        { // 5
+            type:'normal',
+            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            scrollHeight:0,
+            objs: {
+                container:document.querySelector('#sec--5'),
                 
-        //     }
-        // },
-        // { // 3
-        //     type:'normal',
-        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-        //     scrollHeight:0,
-        //     objs: {
-        //         container:document.querySelector('#sec--3'),
-                
-        //     },
-        //     values: {
-                
-        //     }
-        // },
-        // { // 4
-        //     type:'normal',
-        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-        //     scrollHeight:0,
-        //     objs: {
-        //         container:document.querySelector('#sec--4'),
-                
-        //     },
-        //     values: {
-                
-        //     }
-        // },
-        // { // 5
-        //     type:'normal',
-        //     heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-        //     scrollHeight:0,
-        //     objs: {
-        //         container:document.querySelector('#sec--5'),
-                
-        //     },
-        //     values: {
-                
-        //     }
-        // },
+            },
+        },
     ];
 
     function setCanvasImages() {
@@ -201,7 +185,6 @@
                     objs.msgBox.style.opacity = calcValues(values.msgBox_opacity, currentYOffset);
                 }
 
-                console.log(scrollRatio);
                 break;
 
             case 1:
@@ -211,6 +194,10 @@
                 break;
 
             case 3:
+                break;
+            case 4:
+                break;
+            case 5:
                 break;
         }
     }
@@ -249,7 +236,7 @@
         delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
 
         if (!enterNewScene) { //섹션 교차시점이 아닌 경우
-            if (currentScene === 0 || currentScene === 2) { //첫번째 세번째만 컨버스 이미지 드로우
+            if (currentScene === 0) { //첫번째 세번째만 컨버스 이미지 드로우
                 const currentYOffset = delayedYOffset - prevScrollHeight;
                 const objs = sceneInfo[currentScene].objs;
                 const values = sceneInfo[currentScene].values;
