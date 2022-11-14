@@ -1,5 +1,5 @@
 (function () {
-    let container = document.querySelector('.event');
+    let container = document.querySelector('body');
     let yOffset = 0; //window.pageYOffset 변수(현재 스크롤값)
     let prevScrollHeight = 0; //현재 스크롤 위치보다 이전에 위치한 스크롤 섹션들의 높이값의 합
     let currentScene = 0; //현재 활성화된 씬(section)
@@ -28,7 +28,7 @@
             values: {
                 videoImageCount: 335, // 이미지가 335장
                 imageSequence: [0, 334, { start: 0, end: 0.8 }], // 이미지 인덱스 
-                canvas_opacity: [1, 0, { start: 0.93, end: 1 }],
+                canvas_opacity: [1, 0, { start: 0.92, end: 0.99 }],
                 msgT_opacity: [1, 0, { start: 0.1, end: 0.16 }],
                 msgA_opacity: [0, 1, { start: 0.16, end: 0.23 }],
                 msgB_opacity: [0, 1, { start: 0.38, end: 0.45 }],
@@ -43,12 +43,20 @@
             }
         },
         { // 1
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            type:'sticky',
+            heightNum:10, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--1'),
+                content:document.querySelector('.history__cont'),
+                title:document.querySelector('.history__cont--tit'),
+                text:document.querySelector('.history__cont--sub'),
             },
+            values: {
+                cont_opacity: [0, 1, { start: 0, end: 0.15 }],
+                tit_trans: [0, 100, { start: 0.2, end: 0.37 }],
+                txt_trans: [0, 100, { start: 0.25, end: 0.9 }],
+            }
         },
         { // 2
             type:'normal',
@@ -188,6 +196,15 @@
                 break;
 
             case 1:
+                if(scrollRatio <= 0.3){
+                    objs.content.style.opacity = calcValues(values.cont_opacity, currentYOffset);
+                }
+
+                if(scrollRatio <= 0.95){
+                    objs.title.style.transform = `translate(-${calcValues(values.tit_trans, currentYOffset)}vw, -50%)`;
+                    objs.text.style.transform = `translate(-${calcValues(values.txt_trans, currentYOffset)}%, -50%)`;
+                }
+
                 break;
 
             case 2:
@@ -264,7 +281,7 @@
         let tempYOffset = yOffset;
         let tempScrollCount = 0;
         if (yOffset > 0) {
-            let siId = setInterval(() => { //새로고침시 스크롤 강제실행(이미지오류)
+            let siId = setInterval(function() { //새로고침시 스크롤 강제실행(이미지오류)
 
                 window.scrollTo(0, tempYOffset);
                 tempYOffset += 1;
@@ -288,6 +305,10 @@
 
         window.addEventListener('resize', function(){
             setLayout();
+        });
+
+        window.addEventListener("orientationchange", function() { // 모바일 가로모드
+            setTimeout(setLayout, 500);
         });
     });
     
