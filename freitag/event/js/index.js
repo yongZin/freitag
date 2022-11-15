@@ -51,11 +51,16 @@
                 content:document.querySelector('.history__cont'),
                 title:document.querySelector('.history__cont--tit'),
                 text:document.querySelector('.history__cont--sub'),
+                canvas: document.querySelector('#history__canvas--cycle'),
+                context: document.querySelector('#history__canvas--cycle').getContext('2d'),
+                videoImages: []
             },
             values: {
+                videoImageCount: 782, // 이미지가 335장
+                imageSequence: [1, 782, { start: 0, end: 0.8 }], // 이미지 인덱스
                 cont_opacity: [0, 1, { start: 0, end: 0.15 }],
-                tit_trans: [0, 100, { start: 0.2, end: 0.37 }],
-                txt_trans: [0, 100, { start: 0.25, end: 0.9 }],
+                tit_trans: [0, 100, { start: 0.2, end: 0.35 }],
+                txt_trans: [0, 100, { start: 0.25, end: 0.8 }],
             }
         },
         { // 2
@@ -104,6 +109,14 @@
 
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
+
+        let imgElem2;
+        for (let i = 1; i < sceneInfo[1].values.videoImageCount; i++) {
+            imgElem2 = new Image();
+            imgElem2.src = `./images/cycle/cycle-${i}.jpg`;
+
+            sceneInfo[1].objs.videoImages.push(imgElem2);
+        }
     }
 
     function setLayout() { // 각 스크롤 섹션의 높이 세팅
@@ -130,10 +143,24 @@
         }
         container.setAttribute('id', "scene-" + currentScene);
 
-        const widthRatio = window.innerWidth / 1280;
-        const heightRatio = window.innerHeight / 720;
+        let widthRatio = window.innerWidth / 1280;
+        let heightRatio = window.innerHeight / 720;
+        if(widthRatio <= 1){
+            widthRatio = 1;
+        } else{
+            widthRatio = window.innerWidth / 1280;
+        }
 
-        sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio}, ${heightRatio})`;
+        if(heightRatio <= 1){
+            heightRatio = 1;
+        } else{
+            heightRatio = window.innerHeight / 720;
+        }
+        
+        if(window.innerWidth <= 1280){
+            sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
+            sceneInfo[1].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
+        }
         
     }
 
@@ -253,7 +280,7 @@
         delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
 
         if (!enterNewScene) { //섹션 교차시점이 아닌 경우
-            if (currentScene === 0) { //첫번째 세번째만 컨버스 이미지 드로우
+            if (currentScene === 0 || currentScene === 1) { //첫번째 세번째만 컨버스 이미지 드로우
                 const currentYOffset = delayedYOffset - prevScrollHeight;
                 const objs = sceneInfo[currentScene].objs;
                 const values = sceneInfo[currentScene].values;
