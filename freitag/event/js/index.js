@@ -44,23 +44,22 @@
         },
         { // 1
             type:'sticky',
-            heightNum:10, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            heightNum:5, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--1'),
                 content:document.querySelector('.history__cont'),
-                title:document.querySelector('.history__cont--tit'),
-                text:document.querySelector('.history__cont--sub'),
-                canvas: document.querySelector('#history__canvas--cycle'),
-                context: document.querySelector('#history__canvas--cycle').getContext('2d'),
-                videoImages: []
+                txtAll:document.querySelectorAll('.history__cont--txt li'),
+                txt1:document.querySelector('.history__cont--txt li:nth-child(1)'),
+                txt2:document.querySelector('.history__cont--txt li:nth-child(2)'),
+                txt3:document.querySelector('.history__cont--txt li:nth-child(3)'),
+                txt4:document.querySelector('.history__cont--txt li:nth-child(4)'),
+                txt5:document.querySelector('.history__cont--txt li:nth-child(5)'),
+                txt6:document.querySelector('.history__cont--txt li:nth-child(6)'),
             },
             values: {
-                videoImageCount: 782, // 이미지가 335장
-                imageSequence: [1, 782, { start: 0, end: 0.8 }], // 이미지 인덱스
-                cont_opacity: [0, 1, { start: 0, end: 0.15 }],
-                tit_trans: [0, 100, { start: 0.2, end: 0.35 }],
-                txt_trans: [0, 100, { start: 0.25, end: 0.8 }],
+                cont_opacity_in: [0, 1, { start: 0, end: 0.15 }],
+                cont_opacity_out: [1, 0, { start: 0.85, end: 0.97 }],
             }
         },
         { // 2
@@ -109,14 +108,6 @@
 
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
-
-        let imgElem2;
-        for (let i = 1; i < sceneInfo[1].values.videoImageCount; i++) {
-            imgElem2 = new Image();
-            imgElem2.src = `./images/cycle/cycle-${i}.jpg`;
-
-            sceneInfo[1].objs.videoImages.push(imgElem2);
-        }
     }
 
     function setLayout() { // 각 스크롤 섹션의 높이 세팅
@@ -159,7 +150,6 @@
         
         if(window.innerWidth <= 1280){
             sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
-            sceneInfo[1].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
         }
         
     }
@@ -223,15 +213,37 @@
                 break;
 
             case 1:
+                for(i=0; i < objs.txtAll.length; i++){
+                    if(scrollRatio <= 0.15){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt1.style.opacity = 1;
+                    } else if(scrollRatio <= 0.275){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt2.style.opacity = 1;
+                    } else if(scrollRatio <= 0.4){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt3.style.opacity = 1;
+                    } else if(scrollRatio <= 0.525){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt4.style.opacity = 1;
+                    } else if(scrollRatio <= 0.65){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt5.style.opacity = 1;
+                    } else if(scrollRatio <= 0.775){
+                        objs.txtAll[i].style.opacity = 0.2;
+                        objs.txt6.style.opacity = 1;
+                    }
+                }
+                
                 if(scrollRatio <= 0.3){
-                    objs.content.style.opacity = calcValues(values.cont_opacity, currentYOffset);
+                    objs.content.style.opacity = calcValues(values.cont_opacity_in, currentYOffset);
                 }
 
-                if(scrollRatio <= 0.95){
-                    objs.title.style.transform = `translate(-${calcValues(values.tit_trans, currentYOffset)}vw, -50%)`;
-                    objs.text.style.transform = `translate(-${calcValues(values.txt_trans, currentYOffset)}%, -50%)`;
+                if(scrollRatio >= 0.8){
+                    objs.content.style.opacity = calcValues(values.cont_opacity_out, currentYOffset);
                 }
 
+                console.log(scrollRatio);
                 break;
 
             case 2:
@@ -280,7 +292,7 @@
         delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
 
         if (!enterNewScene) { //섹션 교차시점이 아닌 경우
-            if (currentScene === 0 || currentScene === 1) { //첫번째 세번째만 컨버스 이미지 드로우
+            if (currentScene === 0) { //첫번째 세번째만 컨버스 이미지 드로우
                 const currentYOffset = delayedYOffset - prevScrollHeight;
                 const objs = sceneInfo[currentScene].objs;
                 const values = sceneInfo[currentScene].values;

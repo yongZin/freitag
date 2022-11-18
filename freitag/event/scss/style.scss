@@ -95,64 +95,121 @@
             }
         }
     }
+    // .history{
+    //     &__cont{
+    //         width:100%;
+    //         height:100vh;
+    //         top:0;
+    //         left:0;
+    //         z-index:1;
+    //         color:#fff;
+    //         background-color:#111;
+    //         opacity:0;
+    //         &--tit{
+    //             width:100%;
+    //             text-align:center;
+    //             font-size:96px;
+    //             font-family:$f-ebold;
+    //             line-height:1.3;
+    //             white-space:nowrap;
+    //             position:absolute;
+    //             top:50%;
+    //             left:0;
+    //             transform:translate(0vw, -50%);
+    //         }
+    //         &--sub{
+    //             width:800%;
+    //             font-size:0;
+    //             // white-space:nowrap;
+    //             position:absolute;
+    //             top:50%;
+    //             left:100%;
+    //             transform:translate(0%, -50%);
+    //             li{
+    //                 width:12.5%;
+    //                 display:inline-block;
+    //                 vertical-align:middle;
+    //                 text-align:center;
+    //                 font-size:96px;
+    //                 font-family:$f-ebold;
+    //                 line-height:1.3;
+    //             }
+    //         }
+    //     }
+    //     &__canvas{
+    //         width:100%;
+    //         height:100vh;
+    //         canvas{
+    //             width:100%;
+    //             height:100vh;
+    //             opacity:0.4;
+    //             position:absolute;
+    //             top:50%;
+    //             left:50%;
+    //             z-index:-1;
+    //             transform:translate(-50%, -50%) scale(1);
+    //         }
+    //     }
+    // }
     .history{
+        height:100%;
         &__cont{
             width:100%;
-            height:100vh;
-            top:0;
-            left:0;
-            z-index:1;
-            color:#fff;
-            background-color:#111;
+            height:100%;
             opacity:0;
-            &--tit{
+            position:relative;
+            z-index:1;
+            &:before{
+                content:"";
                 width:100%;
-                text-align:center;
-                font-size:96px;
-                font-family:$f-ebold;
-                line-height:1.3;
-                white-space:nowrap;
-                position:absolute;
-                top:50%;
-                left:0;
-                transform:translate(0vw, -50%);
-            }
-            &--sub{
-                width:800%;
-                font-size:0;
-                // white-space:nowrap;
-                position:absolute;
-                top:50%;
-                left:100%;
-                transform:translate(0%, -50%);
-                li{
-                    width:12.5%;
-                    display:inline-block;
-                    vertical-align:middle;
-                    text-align:center;
-                    font-size:96px;
-                    font-family:$f-ebold;
-                    line-height:1.3;
-                }
-            }
-        }
-        &__canvas{
-            width:100%;
-            height:100vh;
-            canvas{
-                width:100%;
-                height:100vh;
+                height:100%;
+                background:url(../images/history/history-bg4.jpg) no-repeat center/100%;
+                background-attachment:fixed;
                 opacity:0.4;
                 position:absolute;
-                top:50%;
-                left:50%;
+                top:0;
+                left:0;
                 z-index:-1;
-                transform:translate(-50%, -50%) scale(1);
+            }
+            &--txt{
+                width:100%;
+                text-align:center;
+                top:50%;
+                left:0;
+                transform:translateY(-50%);
+                li{
+                    font-size:65px;
+                    font-family:$f-ebold;
+                    line-height:1.4;
+                    color:#fff;
+                    opacity:0.2;
+                    &.on{
+                        opacity:1;
+                    }
+                }
             }
         }
     }
     .process{
-
+        &__cont{
+            padding-left:50%;
+            font-size:0;
+            background-color:#fff;
+            &--tit{
+                width:50%;
+                height:50vh;
+                padding-top:20vh;
+                top:0;
+                left:0;
+                li{
+                    text-align:center;
+                    font-size:50px;
+                }
+            }
+            &--gif{
+                width:720px;
+            }
+        }
     }
 }
 
@@ -160,7 +217,18 @@
     &-1{
         .history{
             &__cont{
-                position:fixed;
+                &--txt{
+                    position:fixed;
+                }
+            }
+        }
+    }
+    &-2{
+        .process{
+            &__cont{
+                &--tit{
+                    position:fixed;
+                }
             }
         }
     }
