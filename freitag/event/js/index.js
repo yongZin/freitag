@@ -63,13 +63,24 @@
             }
         },
         { // 2
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            type:'sticky',
+            heightNum:7, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--2'),
-                
+                content:document.querySelector('.process__cont'),
+                listAll:document.querySelectorAll('.process__cont--list'),
+                list1:document.querySelector('.process__cont--list:nth-child(1)'),
+                list2:document.querySelector('.process__cont--list:nth-child(2)'),
+                list3:document.querySelector('.process__cont--list:nth-child(3)'),
+                list4:document.querySelector('.process__cont--list:nth-child(4)'),
+                list5:document.querySelector('.process__cont--list:nth-child(5)'),
+                list6:document.querySelector('.process__cont--list:nth-child(6)'),
+                list7:document.querySelector('.process__cont--list:nth-child(7)'),
             },
+            values: {
+                cont_opacity: [1, 0, { start: 0.9, end: 0.99 }],
+            }
         },
         { // 3
             type:'normal',
@@ -86,15 +97,6 @@
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--4'),
-                
-            },
-        },
-        { // 5
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
-            scrollHeight:0,
-            objs: {
-                container:document.querySelector('#sec--5'),
                 
             },
         },
@@ -123,11 +125,11 @@
             
         }
 
-        var yOffset = window.pageYOffset;
-        var totalScrollHeight = 0;
-        for(var i= 0 ; i < sceneInfo.length; i++){ //새로고침시 현재 스크롤 위치찾기
+        yOffset = window.pageYOffset;
+        let totalScrollHeight = 0;
+        for(let i= 0 ; i < sceneInfo.length; i++){ //새로고침시 현재 스크롤 위치찾기
             totalScrollHeight += sceneInfo[i].scrollHeight;
-            if(totalScrollHeight >= yOffset){
+            if (totalScrollHeight >= yOffset) {
                 currentScene = i;
                 break;
             }
@@ -235,7 +237,7 @@
                     }
                 }
                 
-                if(scrollRatio <= 0.3){
+                if(scrollRatio >= 0){
                     objs.content.style.opacity = calcValues(values.cont_opacity_in, currentYOffset);
                 }
 
@@ -243,17 +245,55 @@
                     objs.content.style.opacity = calcValues(values.cont_opacity_out, currentYOffset);
                 }
 
-                console.log(scrollRatio);
                 break;
 
             case 2:
+                objs.content.style.opacity = calcValues(values.cont_opacity, currentYOffset);
+
+                for(i=0; i < objs.listAll.length; i++){
+                    if(scrollRatio <= 0.15){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list1.classList.remove('out');
+                        objs.list1.classList.add('on');
+                    } else if(scrollRatio <= 0.25){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list2.classList.remove('out');
+                        objs.list2.classList.add('on');
+                    } else if(scrollRatio <= 0.35){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list3.classList.remove('out');
+                        objs.list3.classList.add('on');
+                    } else if(scrollRatio <= 0.45){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list4.classList.remove('out');
+                        objs.list4.classList.add('on');
+                    } else if(scrollRatio <= 0.65){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list5.classList.remove('out');
+                        objs.list5.classList.add('on');
+                    } else if(scrollRatio <= 0.75){
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list6.classList.remove('out');
+                        objs.list6.classList.add('on');
+                    } else{
+                        objs.listAll[i].classList.remove('on');
+                        objs.listAll[i].classList.add('out');
+                        objs.list7.classList.remove('out');
+                        objs.list7.classList.add('on');
+                    }   
+                }
+
                 break;
 
             case 3:
                 break;
             case 4:
-                break;
-            case 5:
                 break;
         }
     }
@@ -262,28 +302,24 @@
         enterNewScene = false;
         prevScrollHeight = 0;
 
-        for(var i= 0 ; i < currentScene; i++){
+        for (let i = 0; i < currentScene; i++) {
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
 
-        if(yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight){
+        if(delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight){
             enterNewScene = true;
             currentScene++;
             container.setAttribute('id', "scene-" + currentScene);
         }
 
-        if(yOffset < prevScrollHeight){
+        if(delayedYOffset < prevScrollHeight){
+            if (currentScene === 0) return; // 브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
             enterNewScene = true;
-            if(currentScene === 0){
-                return;
-            }
             currentScene--;
             container.setAttribute('id', "scene-" + currentScene);
         }
 
-        if(enterNewScene) {
-            return;
-        }
+        if(enterNewScene) return;
 
         playAnimation();
     }
@@ -313,6 +349,8 @@
     
     
     window.addEventListener('load', function(){
+        document.body.classList.remove('hold');
+
         setLayout();
 
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0); //스크롤 하기전 로드후 캔버스 이미지 드로운
@@ -320,7 +358,7 @@
         let tempYOffset = yOffset;
         let tempScrollCount = 0;
         if (yOffset > 0) {
-            let siId = setInterval(function() { //새로고침시 스크롤 강제실행(이미지오류)
+            let siId = setInterval(function() {
 
                 window.scrollTo(0, tempYOffset);
                 tempYOffset += 1;
