@@ -64,22 +64,53 @@
         },
         { // 2
             type:'sticky',
-            heightNum:7, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            heightNum:10, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--2'),
                 content:document.querySelector('.process__cont'),
-                listAll:document.querySelectorAll('.process__cont--list'),
-                list1:document.querySelector('.process__cont--list:nth-child(1)'),
-                list2:document.querySelector('.process__cont--list:nth-child(2)'),
-                list3:document.querySelector('.process__cont--list:nth-child(3)'),
-                list4:document.querySelector('.process__cont--list:nth-child(4)'),
-                list5:document.querySelector('.process__cont--list:nth-child(5)'),
-                list6:document.querySelector('.process__cont--list:nth-child(6)'),
-                list7:document.querySelector('.process__cont--list:nth-child(7)'),
+                // listAll:document.querySelectorAll('.process__cont--list'),
+                list1:document.querySelector('.process__cont--tit li:nth-child(1)'),
+                list2:document.querySelector('.process__cont--tit li:nth-child(2)'),
+                list3:document.querySelector('.process__cont--tit li:nth-child(3)'),
+                list4:document.querySelector('.process__cont--tit li:nth-child(4)'),
+                list5:document.querySelector('.process__cont--tit li:nth-child(5)'),
+                list6:document.querySelector('.process__cont--tit li:nth-child(6)'),
+                list7:document.querySelector('.process__cont--tit li:nth-child(7)'),
             },
             values: {
                 cont_opacity: [1, 0, { start: 0.9, end: 0.99 }],
+
+                list1_trans_out: [0, -70, { start: 0.1, end: 0.15 }],
+                list1_opacity_out: [1, 0, { start: 0.17, end: 0.2 }],
+
+                list2_trans_in: [70, 0, { start: 0.2, end: 0.2625 }],
+                list2_opacity_in: [0, 1, { start: 0.2, end: 0.2225 }],
+                list2_trans_out: [0, -70, { start: 0.2625, end: 0.325 }],
+                list2_opacity_out: [1, 0, { start: 0.295, end: 0.325 }],
+
+                list3_trans_in: [70, 0, { start: 0.325, end: 0.3875 }],
+                list3_opacity_in: [0, 1, { start: 0.325, end: 0.3425 }],
+                list3_trans_out: [0, -70, { start: 0.3875, end: 0.45 }],
+                list3_opacity_out: [1, 0, { start: 0.42, end: 0.45 }],
+
+                list4_trans_in: [70, 0, { start: 0.45, end: 0.5125 }],
+                list4_opacity_in: [0, 1, { start: 0.45, end: 0.4725 }],
+                list4_trans_out: [0, -70, { start: 0.5125, end: 0.575 }],
+                list4_opacity_out: [1, 0, { start: 0.545, end: 0.575 }],
+
+                list5_trans_in: [70, 0, { start: 0.575, end: 0.6375 }],
+                list5_opacity_in: [0, 1, { start: 0.575, end: 0.5975 }],
+                list5_trans_out: [0, -70, { start: 0.6375, end: 0.7 }],
+                list5_opacity_out: [1, 0, { start: 0.67, end: 0.7 }],
+
+                list6_trans_in: [70, 0, { start: 0.7, end: 0.7625 }],
+                list6_opacity_in: [0, 1, { start: 0.7, end: 0.7225 }],
+                list6_trans_out: [0, -70, { start: 0.7625, end: 0.825 }],
+                list6_opacity_out: [1, 0, { start: 0.795, end: 0.825 }],
+
+                list7_trans_in: [70, 0, { start: 0.825, end: 0.8875 }],
+                list7_opacity_in: [0, 1, { start: 0.825, end: 0.8475 }],
             }
         },
         { // 3
@@ -250,43 +281,71 @@
             case 2:
                 objs.content.style.opacity = calcValues(values.cont_opacity, currentYOffset);
 
-                for(i=0; i < objs.listAll.length; i++){
-                    if(scrollRatio <= 0.15){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list1.classList.remove('out');
-                        objs.list1.classList.add('on');
-                    } else if(scrollRatio <= 0.25){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list2.classList.remove('out');
-                        objs.list2.classList.add('on');
-                    } else if(scrollRatio <= 0.35){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list3.classList.remove('out');
-                        objs.list3.classList.add('on');
-                    } else if(scrollRatio <= 0.45){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list4.classList.remove('out');
-                        objs.list4.classList.add('on');
-                    } else if(scrollRatio <= 0.65){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list5.classList.remove('out');
-                        objs.list5.classList.add('on');
-                    } else if(scrollRatio <= 0.75){
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list6.classList.remove('out');
-                        objs.list6.classList.add('on');
-                    } else{
-                        objs.listAll[i].classList.remove('on');
-                        objs.listAll[i].classList.add('out');
-                        objs.list7.classList.remove('out');
-                        objs.list7.classList.add('on');
-                    }   
+                if(scrollRatio >= 0.01){ // #1 out
+                    objs.content.setAttribute('id', 'one');
+                    objs.list1.style.transform = `translateY(${calcValues(values.list1_trans_out, currentYOffset)}px)`;
+                    objs.list1.style.opacity = calcValues(values.list1_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.19){ // #2 in
+                    objs.content.setAttribute('id', 'two');
+                    objs.list2.style.transform = `translateY(${calcValues(values.list2_trans_in, currentYOffset)}px)`;
+                    objs.list2.style.opacity = calcValues(values.list2_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.2525){ // #2 out
+                    objs.list2.style.transform = `translateY(${calcValues(values.list2_trans_out, currentYOffset)}px)`;
+                    objs.list2.style.opacity = calcValues(values.list2_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.315){ // #3 in
+                    objs.content.setAttribute('id', 'three');
+                    objs.list3.style.transform = `translateY(${calcValues(values.list3_trans_in, currentYOffset)}px)`;
+                    objs.list3.style.opacity = calcValues(values.list3_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.3775){ // #3 out
+                    objs.list3.style.transform = `translateY(${calcValues(values.list3_trans_out, currentYOffset)}px)`;
+                    objs.list3.style.opacity = calcValues(values.list3_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.44){ // #4 in
+                    objs.content.setAttribute('id', 'four');
+                    objs.list4.style.transform = `translateY(${calcValues(values.list4_trans_in, currentYOffset)}px)`;
+                    objs.list4.style.opacity = calcValues(values.list4_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.5025){ // #4 out
+                    objs.list4.style.transform = `translateY(${calcValues(values.list4_trans_out, currentYOffset)}px)`;
+                    objs.list4.style.opacity = calcValues(values.list4_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.565){ // #5 in
+                    objs.content.setAttribute('id', 'five');
+                    objs.list5.style.transform = `translateY(${calcValues(values.list5_trans_in, currentYOffset)}px)`;
+                    objs.list5.style.opacity = calcValues(values.list5_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.6275){ // #5 out
+                    objs.list5.style.transform = `translateY(${calcValues(values.list5_trans_out, currentYOffset)}px)`;
+                    objs.list5.style.opacity = calcValues(values.list5_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.69){ // #6 in
+                    objs.content.setAttribute('id', 'six');
+                    objs.list6.style.transform = `translateY(${calcValues(values.list6_trans_in, currentYOffset)}px)`;
+                    objs.list6.style.opacity = calcValues(values.list6_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.7525){ // #6 out
+                    objs.list6.style.transform = `translateY(${calcValues(values.list6_trans_out, currentYOffset)}px)`;
+                    objs.list6.style.opacity = calcValues(values.list6_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.815){ // #7 in
+                    objs.content.setAttribute('id', 'seven');
+                    objs.list7.style.transform = `translateY(${calcValues(values.list7_trans_in, currentYOffset)}px)`;
+                    objs.list7.style.opacity = calcValues(values.list7_opacity_in, currentYOffset);
                 }
 
                 break;
