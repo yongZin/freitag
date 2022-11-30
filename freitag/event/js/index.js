@@ -114,8 +114,8 @@
             }
         },
         { // 3
-            type:'normal',
-            heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            type:'sticky',
+            heightNum:8, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--3'),
