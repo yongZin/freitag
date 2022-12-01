@@ -8,7 +8,9 @@
     let delayedYOffset = 0;
     let rafId;
     let rafState;
-
+    const bagList = document.querySelector('.product__cont--item li'); //sceneInfo[3]
+    let move = (bagList.offsetWidth * 10) - container.offsetWidth; //sceneInfo[3]
+    
     const sceneInfo = [
         { // 0
             type:'sticky',
@@ -115,12 +117,17 @@
         },
         { // 3
             type:'sticky',
-            heightNum:8, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
+            heightNum:5, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--3'),
-                
+                bag1:document.querySelector('.product__cont--item:nth-child(1)'),
+                bag2:document.querySelector('.product__cont--item:nth-child(2)'),
             },
+            values: {
+                cont_opacity_in: [0, 1, { start: 0, end: 0.15 }],
+                cont_opacity_out: [1, 0, { start: 0.85, end: 0.97 }],
+            }
         },
         { // 4
             type:'normal',
@@ -351,6 +358,7 @@
                 break;
 
             case 3:
+            
                 break;
             case 4:
                 break;
@@ -409,7 +417,7 @@
     
     window.addEventListener('load', function(){
         document.body.classList.remove('hold');
-
+        
         setLayout();
 
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0); //스크롤 하기전 로드후 캔버스 이미지 드로운
