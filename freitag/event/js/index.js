@@ -8,8 +8,13 @@
     let delayedYOffset = 0;
     let rafId;
     let rafState;
-    const bagList = document.querySelector('.product__cont--item li'); //sceneInfo[3]
-    let move = (bagList.offsetWidth * 10) - container.offsetWidth; //sceneInfo[3]
+    /* sceneInfo[3] */
+    const bagItem = document.querySelector('.product__cont--item:first-child');
+    const bagList = document.querySelector('.product__cont--item li');
+    let move = (bagList.offsetWidth * 10) - container.offsetWidth;
+
+    bagItem.style.transform = `translateX(-${move}px)`;
+    /* //sceneInfo[3] */
     
     const sceneInfo = [
         { // 0
@@ -121,12 +126,30 @@
             scrollHeight:0,
             objs: {
                 container:document.querySelector('#sec--3'),
-                bag1:document.querySelector('.product__cont--item:nth-child(1)'),
-                bag2:document.querySelector('.product__cont--item:nth-child(2)'),
+                trio1:document.querySelector('.product__title--trio li:nth-child(1)'),
+                trio2:document.querySelector('.product__title--trio li:nth-child(2)'),
+                trio3:document.querySelector('.product__title--trio li:nth-child(3)'),
+                bag1:document.querySelector('.product__cont--item:first-child'),
+                bag2:document.querySelector('.product__cont--item:last-child'),
             },
             values: {
-                cont_opacity_in: [0, 1, { start: 0, end: 0.15 }],
-                cont_opacity_out: [1, 0, { start: 0.85, end: 0.97 }],
+                trio1_trans_in: [30, 0, { start: 0.05, end: 0.15 }],
+                trio1_opacity_in: [0, 1, { start: 0.05, end: 0.1 }],
+                trio1_trans_out: [0, -30, { start: 0.25, end: 0.35 }],
+                trio1_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
+
+                trio2_trans_in: [30, 0, { start: 0.35, end: 0.45 }],
+                trio2_opacity_in: [0, 1, { start: 0.35, end: 0.4 }],
+                trio2_trans_out: [0, -30, { start: 0.55, end: 0.65 }],
+                trio2_opacity_out: [1, 0, { start: 0.6, end: 0.65 }],
+
+                trio3_trans_in: [30, 0, { start: 0.65, end: 0.75 }],
+                trio3_opacity_in: [0, 1, { start: 0.65, end: 0.6 }],
+
+                bag1_trans: [move, 0, { start: 0.35, end: 0.9 }],
+                bag2_trans: [0, move, { start: 0.35, end: 0.9 }],
+
+                bag_opacity: [0, 1, { start: 0, end: 0.2 }],
             }
         },
         { // 4
@@ -192,6 +215,10 @@
             sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
         }
         
+        /* sceneInfo[3] */
+        move = (bagList.offsetWidth * 10) - container.offsetWidth;
+        bagItem.style.transform = `translateX(-${move}px)`;
+        /* //sceneInfo[3] */
     }
 
     function calcValues(values, currentYOffset){ // 현재 섹션에서의 스크롤 위치
@@ -358,7 +385,36 @@
                 break;
 
             case 3:
-            
+                objs.bag1.style.opacity = calcValues(values.bag_opacity, currentYOffset);
+                objs.bag2.style.opacity = calcValues(values.bag_opacity, currentYOffset);
+                objs.bag1.style.transform = `translateX(${calcValues(values.bag1_trans, currentYOffset)}px)`;
+                objs.bag2.style.transform = `translateX(${calcValues(values.bag2_trans, currentYOffset)}px)`;
+                
+                if(scrollRatio >= 0){ // #1 in
+                    objs.trio1.style.transform = `translateY(${calcValues(values.trio1_trans_in, currentYOffset)}px)`;
+                    objs.trio1.style.opacity = calcValues(values.trio1_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.2){ // #1 out
+                    objs.trio1.style.transform = `translateY(${calcValues(values.trio1_trans_out, currentYOffset)}px)`;
+                    objs.trio1.style.opacity = calcValues(values.trio1_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.3){ // #2 in
+                    objs.trio2.style.transform = `translateY(${calcValues(values.trio2_trans_in, currentYOffset)}px)`;
+                    objs.trio2.style.opacity = calcValues(values.trio2_opacity_in, currentYOffset);
+                }
+                
+                if(scrollRatio >= 0.5){ // #2 out
+                    objs.trio2.style.transform = `translateY(${calcValues(values.trio2_trans_out, currentYOffset)}px)`;
+                    objs.trio2.style.opacity = calcValues(values.trio2_opacity_out, currentYOffset);
+                }
+
+                if(scrollRatio >= 0.6){ // #3 in
+                    objs.trio3.style.transform = `translateY(${calcValues(values.trio3_trans_in, currentYOffset)}px)`;
+                    objs.trio3.style.opacity = calcValues(values.trio3_opacity_in, currentYOffset);
+                }
+                
                 break;
             case 4:
                 break;
@@ -428,9 +484,9 @@
             let siId = setInterval(function() {
 
                 window.scrollTo(0, tempYOffset);
-                tempYOffset += 1;
+                tempYOffset += 5;
 
-                if (tempScrollCount > 10) {
+                if (tempScrollCount > 30) {
                     clearInterval(siId);
                 }
                 tempScrollCount++;
@@ -455,7 +511,6 @@
             setTimeout(setLayout, 500);
         });
     });
-    
 
     setCanvasImages();
 })();

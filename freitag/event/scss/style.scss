@@ -1,6 +1,7 @@
 @import "../../common/scss/common.scss";
 
 body{
+    scroll-behavior:smooth;
     &.hold{
         overflow:hidden;
         &:before{
@@ -329,11 +330,8 @@ body{
                 height:33.3vh;
                 font-size:0;
                 white-space:nowrap;
-                // &:first-child{
-                //     transform:translateX(-100%);
-                // }
+                opacity:0;
                 li{
-                    width:416px;
                     height:100%;
                     display:inline-block;
                     vertical-align:middle;
@@ -354,7 +352,7 @@ body{
             &--bold{
                 display:inline-block;
                 vertical-align:middle;
-                margin-right:40px;
+                margin-right:30px;
                 font-size:65px;
                 font-family:$f-ebold;
             }
@@ -369,11 +367,12 @@ body{
                     font-size:70px;
                     font-family:$f-ebold;
                     text-transform:capitalize;
+                    opacity:0;
                     color:transparent;
                     background-clip:text;
                     -webkit-background-clip:text;
                     -webkit-text-fill-color:transparent;
-                    animation:rotate 2s linear infinite;
+                    animation:rotate 3s linear infinite;
                     position:absolute;
                     top:0;
                     left:0;
