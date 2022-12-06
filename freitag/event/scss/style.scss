@@ -87,6 +87,7 @@ body{
                 top:calc(50% + 50px);
                 left:0;
                 transform:translateY(-50%);
+                z-index:1;
             }
             &--slide{
                 width:100%;
@@ -96,6 +97,7 @@ body{
                 left:0;
                 transform:translate(280px, -50%);
                 transition:0.3s;
+                z-index:1;
                 li{
                     display:inline-block;
                     vertical-align:middle;
@@ -119,7 +121,7 @@ body{
             height:100%;
             opacity:0;
             position:relative;
-            z-index:1;
+            z-index:2;
             &:before{
                 content:"";
                 width:100%;
@@ -163,20 +165,7 @@ body{
             position:sticky;
             top:0;
             left:0;
-            // &:before{
-            //     content:"";
-            //     width:100%;
-            //     height:100vh;
-            //     position:absolute;
-            //     top:0;
-            //     left:0;
-            //     z-index:-1;
-            //     background-color:transparent;
-            //     background-repeat:no-repeat;
-            //     background-position:center;
-            //     background-size:100% 100%;
-            //     transition:300ms ease-in-out;
-            // }
+            z-index:3;
             &--wrap{
                 width:calc(100% - 40px);
                 max-width:1400px;
@@ -230,90 +219,6 @@ body{
                     }
                 }
             }
-            &#one{
-                // &:before{
-                //     background-image:url(../images/process/tarp-1.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(1){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#two{
-                // &:before{
-                //     background-image:url(../images/process/tarp-2.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(2){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#three{
-                // &:before{
-                //     background-image:url(../images/process/tarp-3.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(3){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#four{
-                // &:before{
-                //     background-image:url(../images/process/tarp-4.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(4){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#five{
-                // &:before{
-                //     background-image:url(../images/process/tarp-5.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(5){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#six{
-                // &:before{
-                //     background-image:url(../images/process/tarp-6.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(6){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
-            &#seven{
-                // &:before{
-                //     background-image:url(../images/process/tarp-7.png);
-                // }
-                .process__cont{
-                    &--gif{
-                        li:nth-child(7){
-                            opacity:1;
-                        }
-                    }
-                }
-            }
         }
     }
     .product{
@@ -325,6 +230,7 @@ body{
             position:sticky;
             top:0;
             left:0;
+            z-index:4;
             &--item{
                 width:100%;
                 height:33.3vh;
@@ -397,6 +303,85 @@ body{
             }
         }
     }
+    .store{
+        background-color:#fff;
+        &__cont{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            padding:40vh 0 15vh;
+            position:relative;
+            z-index:5;
+            &--tit{
+                margin-bottom:80px;
+                text-align:center;
+                font-size:65px;
+                font-family:$f-ebold;
+            }
+        }
+        &__info{
+            width:100%;
+            max-width:1600px;
+            font-size:0;
+            &--list{
+                width:50%;
+                display:inline-block;
+                vertical-align:top;
+                padding:2.5%;
+                &:before{
+                    content:"";
+                    width:100%;
+                    height:300px;
+                    display:block;
+                    border-radius:5px;
+                    background-repeat:no-repeat;
+                    background-position:center;
+                    background-size:cover;
+                }
+                li{
+                    margin-top:10px;
+                    line-height:1.3;
+                    font-size:18px;
+                    word-break:keep-all;
+                    &.bold{
+                        margin:15px 0;
+                        font-size:22px;
+                        font-family:$f-ebold;
+                    }
+                    
+                }
+                &.hongdae{
+                    &:before{
+                        background-image:url(../images/store/hongdae.jpg);
+                    }
+                }
+                &.apgujeong{
+                    &:before{
+                        background-position:center bottom;
+                        background-image:url(../images/store/apgujeong.jpg);
+                    }
+                }
+                &.itaewon{
+                    &:before{
+                        background-image:url(../images/store/itaewon.jpg);
+                    }
+                }
+                &.jeju{
+                    &:before{
+                        background-position:center top;
+                        background-image:url(../images/store/jeju.jpg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer{
+    position:relative;
+    z-index:6;
 }
 
 #scene{

@@ -68,7 +68,7 @@ time, mark, audio, video {
 	padding:0;
 	border:0;
 	font-size:100%;
-	font-family:$f-reular;
+	font-family:$f-bold;
 	font:inherit;
 	vertical-align:baseline;
 	box-sizing:border-box;
@@ -79,6 +79,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height:1.2;
+	font-family:$f-bold;
 }
 ol, ul {
 	list-style:none;

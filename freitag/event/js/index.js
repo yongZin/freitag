@@ -10,10 +10,9 @@
     let rafState;
     /* sceneInfo[3] */
     const bagItem = document.querySelector('.product__cont--item:first-child');
-    const bagList = document.querySelector('.product__cont--item li');
-    let move = (bagList.offsetWidth * 10) - container.offsetWidth;
+    let move = container.offsetWidth - (bagItem.offsetHeight * 10);
 
-    bagItem.style.transform = `translateX(-${move}px)`;
+    bagItem.style.transform = `translateX(${move}px)`;
     /* //sceneInfo[3] */
     
     const sceneInfo = [
@@ -157,8 +156,7 @@
             heightNum:4, //브라우저 높이의 배수 (heightNum x scrollHeight = 높이값)
             scrollHeight:0,
             objs: {
-                container:document.querySelector('#sec--4'),
-                
+                container:document.querySelector('#sec--4')
             },
         },
     ];
@@ -214,11 +212,6 @@
         if(window.innerWidth <= 1280){
             sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${widthRatio})`;
         }
-        
-        /* sceneInfo[3] */
-        move = (bagList.offsetWidth * 10) - container.offsetWidth;
-        bagItem.style.transform = `translateX(-${move}px)`;
-        /* //sceneInfo[3] */
     }
 
     function calcValues(values, currentYOffset){ // 현재 섹션에서의 스크롤 위치
@@ -321,62 +314,62 @@
                     objs.list1.style.opacity = calcValues(values.list1_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.19){ // #2 in
+                if(scrollRatio >= 0.2){ // #2 in
                     objs.content.setAttribute('id', 'two');
                     objs.list2.style.transform = `translateY(${calcValues(values.list2_trans_in, currentYOffset)}px)`;
                     objs.list2.style.opacity = calcValues(values.list2_opacity_in, currentYOffset);
                 }
                 
-                if(scrollRatio >= 0.2525){ // #2 out
+                if(scrollRatio >= 0.2625){ // #2 out
                     objs.list2.style.transform = `translateY(${calcValues(values.list2_trans_out, currentYOffset)}px)`;
                     objs.list2.style.opacity = calcValues(values.list2_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.315){ // #3 in
+                if(scrollRatio >= 0.325){ // #3 in
                     objs.content.setAttribute('id', 'three');
                     objs.list3.style.transform = `translateY(${calcValues(values.list3_trans_in, currentYOffset)}px)`;
                     objs.list3.style.opacity = calcValues(values.list3_opacity_in, currentYOffset);
                 }
                 
-                if(scrollRatio >= 0.3775){ // #3 out
+                if(scrollRatio >= 0.3875){ // #3 out
                     objs.list3.style.transform = `translateY(${calcValues(values.list3_trans_out, currentYOffset)}px)`;
                     objs.list3.style.opacity = calcValues(values.list3_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.44){ // #4 in
+                if(scrollRatio >= 0.45){ // #4 in
                     objs.content.setAttribute('id', 'four');
                     objs.list4.style.transform = `translateY(${calcValues(values.list4_trans_in, currentYOffset)}px)`;
                     objs.list4.style.opacity = calcValues(values.list4_opacity_in, currentYOffset);
                 }
                 
-                if(scrollRatio >= 0.5025){ // #4 out
+                if(scrollRatio >= 0.5125){ // #4 out
                     objs.list4.style.transform = `translateY(${calcValues(values.list4_trans_out, currentYOffset)}px)`;
                     objs.list4.style.opacity = calcValues(values.list4_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.565){ // #5 in
+                if(scrollRatio >= 0.575){ // #5 in
                     objs.content.setAttribute('id', 'five');
                     objs.list5.style.transform = `translateY(${calcValues(values.list5_trans_in, currentYOffset)}px)`;
                     objs.list5.style.opacity = calcValues(values.list5_opacity_in, currentYOffset);
                 }
                 
-                if(scrollRatio >= 0.6275){ // #5 out
+                if(scrollRatio >= 0.6375){ // #5 out
                     objs.list5.style.transform = `translateY(${calcValues(values.list5_trans_out, currentYOffset)}px)`;
                     objs.list5.style.opacity = calcValues(values.list5_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.69){ // #6 in
+                if(scrollRatio >= 0.7){ // #6 in
                     objs.content.setAttribute('id', 'six');
                     objs.list6.style.transform = `translateY(${calcValues(values.list6_trans_in, currentYOffset)}px)`;
                     objs.list6.style.opacity = calcValues(values.list6_opacity_in, currentYOffset);
                 }
                 
-                if(scrollRatio >= 0.7525){ // #6 out
+                if(scrollRatio >= 0.7625){ // #6 out
                     objs.list6.style.transform = `translateY(${calcValues(values.list6_trans_out, currentYOffset)}px)`;
                     objs.list6.style.opacity = calcValues(values.list6_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.815){ // #7 in
+                if(scrollRatio >= 0.825){ // #7 in
                     objs.content.setAttribute('id', 'seven');
                     objs.list7.style.transform = `translateY(${calcValues(values.list7_trans_in, currentYOffset)}px)`;
                     objs.list7.style.opacity = calcValues(values.list7_opacity_in, currentYOffset);
@@ -505,6 +498,14 @@
 
         window.addEventListener('resize', function(){
             setLayout();
+
+            /* sceneInfo[3] */
+            move = container.offsetWidth - (bagItem.offsetHeight * 10);
+            bagItem.style.transform = `translateX(${move}px)`;
+            
+            sceneInfo[3].values.bag1_trans = [move, 0, { start: 0.35, end: 0.9 }];
+            sceneInfo[3].values.bag2_trans = [0, move, { start: 0.35, end: 0.9 }];
+            /* //sceneInfo[3] */
         });
 
         window.addEventListener("orientationchange", function() { // 모바일 가로모드
