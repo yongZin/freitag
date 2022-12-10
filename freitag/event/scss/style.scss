@@ -6,7 +6,7 @@ body{
         overflow:hidden;
         &:before{
             content:"";
-            width:100vh;
+            width:100%;
             height:100vh;
             background-color:#111;
             position:absolute;
@@ -41,7 +41,7 @@ body{
                 }
             }
         }
-    }    
+    }
 }
 
 .event{
@@ -223,6 +223,7 @@ body{
     }
     .product{
         height:100%;
+        background-color:#fff;
         &__cont{
             height:100vh;
             background-color:#fff;
@@ -330,48 +331,67 @@ body{
                 display:inline-block;
                 vertical-align:top;
                 padding:2.5%;
-                &:before{
-                    content:"";
-                    width:100%;
-                    height:300px;
-                    display:block;
-                    border-radius:5px;
-                    background-repeat:no-repeat;
-                    background-position:center;
-                    background-size:cover;
-                }
                 li{
                     margin-top:10px;
                     line-height:1.3;
                     font-size:18px;
                     word-break:keep-all;
+                    &.img{
+                        width:100%;
+                        height:300px;
+                        overflow:hidden;
+                        cursor:pointer;
+                        a{
+                            width:100%;
+                            height:100%;
+                            display:block;
+                            border-radius:5px;
+                            background-repeat:no-repeat;
+                            background-position:center;
+                            background-size:cover;
+                            transform:scale(1);
+                            transition:0.4s;
+                        }
+                        &:hover{
+                            a{
+                                transform:scale(1.07);
+                            }
+                        }
+                    }
                     &.bold{
                         margin:15px 0;
                         font-size:22px;
                         font-family:$f-ebold;
                     }
-                    
                 }
                 &.hongdae{
-                    &:before{
-                        background-image:url(../images/store/hongdae.jpg);
+                    .img{
+                        a{
+                            background-image:url(../images/store/hongdae.jpg);
+                        }
                     }
                 }
                 &.apgujeong{
-                    &:before{
-                        background-position:center bottom;
-                        background-image:url(../images/store/apgujeong.jpg);
+                    .img{
+                        a{
+                            background-position:center bottom;
+                            background-image:url(../images/store/apgujeong.jpg);
+                        }
                     }
                 }
                 &.itaewon{
-                    &:before{
-                        background-image:url(../images/store/itaewon.jpg);
+                    .img{
+                        a{
+                            background-image:url(../images/store/itaewon.jpg);
+                        }
                     }
                 }
                 &.jeju{
-                    &:before{
-                        background-position:center top;
-                        background-image:url(../images/store/jeju.jpg);
+                    .img{
+                        a{
+                            background-position:center top;
+                            background-image:url(../images/store/jeju.jpg);
+                        }
                     }
                 }
             }
@@ -380,8 +400,43 @@ body{
 }
 
 .footer{
+    padding:20px 0;
+    text-align:center;
     position:relative;
     z-index:6;
+    &__top{
+        width:calc(100% - 40px);
+        max-width:1400px;
+        position:fixed;
+        bottom:30px;
+        left:50%;
+        transform:translateX(-50%);
+        &--btn{
+            width:50px;
+            height:50px;
+            border:4px solid #ccc;
+            border-radius:50%;
+            opacity:0.5;
+            transition:0.3s;
+            cursor:pointer;
+            position:absolute;
+            bottom:0;
+            right:0;
+            &:before{
+                content:"";
+                width:30%;
+                height:30%;
+                display:block;
+                margin:15px auto;
+                border-top:4px solid #ccc;
+                border-right:4px solid #ccc;
+                transform:rotate(-45deg);
+            }
+            &:hover{
+                opacity:1;
+            }
+        }
+    } 
 }
 
 #scene{

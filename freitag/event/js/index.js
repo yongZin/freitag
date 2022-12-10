@@ -91,32 +91,32 @@
                 list1_opacity_out: [1, 0, { start: 0.17, end: 0.2 }],
 
                 list2_trans_in: [70, 0, { start: 0.2, end: 0.2625 }],
-                list2_opacity_in: [0, 1, { start: 0.2, end: 0.2225 }],
+                list2_opacity_in: [-0.1, 1, { start: 0.2, end: 0.2225 }],
                 list2_trans_out: [0, -70, { start: 0.2625, end: 0.325 }],
                 list2_opacity_out: [1, 0, { start: 0.295, end: 0.325 }],
 
                 list3_trans_in: [70, 0, { start: 0.325, end: 0.3875 }],
-                list3_opacity_in: [0, 1, { start: 0.325, end: 0.3425 }],
+                list3_opacity_in: [-0.1, 1, { start: 0.325, end: 0.3425 }],
                 list3_trans_out: [0, -70, { start: 0.3875, end: 0.45 }],
                 list3_opacity_out: [1, 0, { start: 0.42, end: 0.45 }],
 
                 list4_trans_in: [70, 0, { start: 0.45, end: 0.5125 }],
-                list4_opacity_in: [0, 1, { start: 0.45, end: 0.4725 }],
+                list4_opacity_in: [-0.1, 1, { start: 0.45, end: 0.4725 }],
                 list4_trans_out: [0, -70, { start: 0.5125, end: 0.575 }],
                 list4_opacity_out: [1, 0, { start: 0.545, end: 0.575 }],
 
                 list5_trans_in: [70, 0, { start: 0.575, end: 0.6375 }],
-                list5_opacity_in: [0, 1, { start: 0.575, end: 0.5975 }],
+                list5_opacity_in: [-0.1, 1, { start: 0.575, end: 0.5975 }],
                 list5_trans_out: [0, -70, { start: 0.6375, end: 0.7 }],
                 list5_opacity_out: [1, 0, { start: 0.67, end: 0.7 }],
 
                 list6_trans_in: [70, 0, { start: 0.7, end: 0.7625 }],
-                list6_opacity_in: [0, 1, { start: 0.7, end: 0.7225 }],
+                list6_opacity_in: [-0.1, 1, { start: 0.7, end: 0.7225 }],
                 list6_trans_out: [0, -70, { start: 0.7625, end: 0.825 }],
                 list6_opacity_out: [1, 0, { start: 0.795, end: 0.825 }],
 
                 list7_trans_in: [70, 0, { start: 0.825, end: 0.8875 }],
-                list7_opacity_in: [0, 1, { start: 0.825, end: 0.8475 }],
+                list7_opacity_in: [-0.1, 1, { start: 0.825, end: 0.8475 }],
             }
         },
         { // 3
@@ -314,7 +314,7 @@
                     objs.list1.style.opacity = calcValues(values.list1_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.2){ // #2 in
+                if(scrollRatio >= 0.19){ // #2 in
                     objs.content.setAttribute('id', 'two');
                     objs.list2.style.transform = `translateY(${calcValues(values.list2_trans_in, currentYOffset)}px)`;
                     objs.list2.style.opacity = calcValues(values.list2_opacity_in, currentYOffset);
@@ -325,7 +325,7 @@
                     objs.list2.style.opacity = calcValues(values.list2_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.325){ // #3 in
+                if(scrollRatio >= 0.315){ // #3 in
                     objs.content.setAttribute('id', 'three');
                     objs.list3.style.transform = `translateY(${calcValues(values.list3_trans_in, currentYOffset)}px)`;
                     objs.list3.style.opacity = calcValues(values.list3_opacity_in, currentYOffset);
@@ -336,7 +336,7 @@
                     objs.list3.style.opacity = calcValues(values.list3_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.45){ // #4 in
+                if(scrollRatio >= 0.44){ // #4 in
                     objs.content.setAttribute('id', 'four');
                     objs.list4.style.transform = `translateY(${calcValues(values.list4_trans_in, currentYOffset)}px)`;
                     objs.list4.style.opacity = calcValues(values.list4_opacity_in, currentYOffset);
@@ -347,7 +347,7 @@
                     objs.list4.style.opacity = calcValues(values.list4_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.575){ // #5 in
+                if(scrollRatio >= 0.565){ // #5 in
                     objs.content.setAttribute('id', 'five');
                     objs.list5.style.transform = `translateY(${calcValues(values.list5_trans_in, currentYOffset)}px)`;
                     objs.list5.style.opacity = calcValues(values.list5_opacity_in, currentYOffset);
@@ -358,7 +358,7 @@
                     objs.list5.style.opacity = calcValues(values.list5_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.7){ // #6 in
+                if(scrollRatio >= 0.69){ // #6 in
                     objs.content.setAttribute('id', 'six');
                     objs.list6.style.transform = `translateY(${calcValues(values.list6_trans_in, currentYOffset)}px)`;
                     objs.list6.style.opacity = calcValues(values.list6_opacity_in, currentYOffset);
@@ -369,7 +369,7 @@
                     objs.list6.style.opacity = calcValues(values.list6_opacity_out, currentYOffset);
                 }
 
-                if(scrollRatio >= 0.825){ // #7 in
+                if(scrollRatio >= 0.815){ // #7 in
                     objs.content.setAttribute('id', 'seven');
                     objs.list7.style.transform = `translateY(${calcValues(values.list7_trans_in, currentYOffset)}px)`;
                     objs.list7.style.opacity = calcValues(values.list7_opacity_in, currentYOffset);
@@ -409,6 +409,7 @@
                 }
                 
                 break;
+                
             case 4:
                 break;
         }
