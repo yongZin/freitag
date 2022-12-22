@@ -21,3 +21,12 @@
         }
     }
 }
+
+@include respond-to(xs) {
+    .fr{
+        &-logo{
+            width:40px;
+            background:url(../../common/images/logo-xs.svg) no-repeat center/100%;
+        }
+    }
+}
