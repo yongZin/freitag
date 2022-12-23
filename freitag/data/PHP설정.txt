@@ -1,0 +1,8 @@
+**PHP 프로젝트 저장 경로
+   - C:\xampp\htdocs
+
+**PHP 파일 tasks.json 경로 설정
+   - "localhost\\${workspaceRootFolderName}\\${relativeFile}\\${fileBasename}"
+
+**index.php 실행
+  - ctrl + shift + B
