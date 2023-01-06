@@ -535,7 +535,7 @@ body{
 }
 
 @include respond-to(pc) {
-    .event{
+    .scroll{
         .top{
             &__msg{
                 &--tit{
@@ -634,7 +634,7 @@ body{
             }
         }
     }
-    .event{
+    .scroll{
         .top{
             &__msg{
                 &--tit{
@@ -710,7 +710,7 @@ body{
 }
 
 @include respond-to(lg) {
-    .event{
+    .scroll{
         .top{
             &__msg{
                 &--tit{
@@ -808,7 +808,7 @@ body{
 }
 
 @include respond-to(sm) {
-    .event{
+    .scroll{
         .top{
             &__msg{
                 &--tit{
@@ -906,7 +906,7 @@ body{
             }
         }
     }
-    .event{
+    .scroll{
         .top{
             &__msg{
                 &--tit{
