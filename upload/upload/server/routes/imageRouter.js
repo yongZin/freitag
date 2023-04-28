@@ -6,13 +6,13 @@ const { ADMIN, ADMIN_ID } = process.env; //super //superadimn
 const fs = require("fs"); //file system
 const { promisify } = require("util");
 const mongoose = require("mongoose");
-
-const fileUnlink = promisify(fs.unlink); 
+const fileUnlink = promisify(fs.unlink);
 
 imageRouter.post("/", upload.array("image", 4), async (req, res) => {
 	// DB저장, 유저정보 저장
 	try {
 		if(!req.user) throw new Error("권한이 없습니다."); //로그인 유무 확인
+		console.log(req.files);
 		// if(req.user.username !== ADMIN && req.user.id !== ADMIN_ID)
 		// 	throw new Error("권한이 없습니다."); //관리자만 업로드 가능
 
@@ -44,8 +44,10 @@ imageRouter.post("/", upload.array("image", 4), async (req, res) => {
 			},
 			key: fileName[0], //업로드한 첫번쨰 이미지
 			details: req.files.map((file) => ({
-				key: file.filename,
-				filename: file.filename,
+				// key: file.filename,
+				// filename: file.filename,
+				key: file.key.replace("raw/", ""),
+				filename: file.key.replace("raw/", ""),
 				originalFileName: file.originalname,
 			}))
 		}).save()
@@ -94,8 +96,9 @@ imageRouter.get("/:imageId", async (req, res) => { //상세페이지 이미지 D
 imageRouter.delete("/:imageId", async (req, res) => { // 사진삭제
 	try {
 		if(!req.user) throw new Error("권한이 없습니다."); //로그인 유무 확인
-		if(req.user.username !== ADMIN && req.user.id !== ADMIN_ID)
-			throw new Error("권한이 없습니다."); //관리자만 삭제 가능
+	
+		// if((req.user.username !== ADMIN && req.user.id !== ADMIN_ID) || req.user.id !== ADMIN_ID)
+		// 	throw new Error("권한이 없습니다."); //관리자, 게스트만 삭제 가능(삭제버튼 생성유무로 변경)
 
 		if(!mongoose.isValidObjectId(req.params.imageId))
 			throw new Error("올바르지 않은 이미지 입니다.");

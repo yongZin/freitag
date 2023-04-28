@@ -21,3 +21,6 @@ mongoose // DB 연결
     app.listen(PORT, () => console.log("PORT: " + PORT));
   })
   .catch((err) => console.log(err));
+  // admin
+  // wa9xaBDs3PyVWMbZ
+  

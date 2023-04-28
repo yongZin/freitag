@@ -6,17 +6,24 @@ import styled from "styled-components";
 
 const ItemList = styled.div`
 	a{
-		/* width:calc(50% - 6px); */
-		width:100%;
+		width:calc(50% - 6px);
 		display:inline-block;
 		vertical-align:top;
-		/* margin:0 6px 1.5% 0; */
+		margin:0 6px 5% 0;
+		position:relative;
 		cursor:pointer;
-		/* &:nth-child(3n){
-			margin:0;
-		} */
+		&:before{
+			content:"";
+			display:block;
+			padding-bottom:100%;
+		}
 		img{
-			object-fit:cover;
+			width:100%;
+			height:100%;
+			object-fit:contain;
+			position:absolute;
+			top:0;
+			left:0;
 		}
 	}
 `;
@@ -59,7 +66,6 @@ const Product = () => {
 			{item}
 
 			{imageError && <div>Error...</div>}
-			{!imageLoad ? <div>Loading</div> : <button onClick={loadMoreImages}>More</button>}
 		</ItemList>
 	)
 }

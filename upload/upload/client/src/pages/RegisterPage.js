@@ -8,8 +8,31 @@ import { AuthContext } from "../context/AuthContext";
 
 const Wrap = styled.div`
 	width:100%;
-	max-width:350px;
-	margin:100px auto 0;
+	>div{
+		width:100%;
+		max-width:350px;
+		margin:15vh auto 0;
+	}
+	h3{
+		margin-bottom:40px;
+		text-align:center;
+		font-size:30px;
+	}
+`;
+
+const SubmitBtn = styled.button`
+	width:100%;
+	height:48px;
+	margin-top:10px;
+	font-size:16px;
+	border:0;
+	border-radius:5px;
+	color:#fff;
+	background-color:#333;
+	transition:0.3s;
+	&:hover{
+		background-color:#555;
+	}
 `;
 
 const RegisterPage = () =>{
@@ -50,34 +73,40 @@ const RegisterPage = () =>{
 
 	return(
 		<Wrap>
-			<h3>회원가입</h3>
+			<div>
+				<h3>회원가입</h3>
 
-			<form onSubmit={submitHandler}>
-				<CustomInput 
-					label="이름"
-					value={name}
-					setValue={setName}
-				/>
-				<CustomInput 
-					label="아이디"
-					value={username}
-					setValue={setUsername}
-				/>
-				<CustomInput 
-					label="비밀번호"
-					value={password}
-					setValue={setPassword}
-					type="password"
-				/>
-				<CustomInput 
-					label="비밀번호 확인"
-					value={passwordChk}
-					setValue={setPasswordChk}
-					type="password"
-				/>
+				<form onSubmit={submitHandler}>
+					<CustomInput 
+						id="inputName"
+						label="이름"
+						value={name}
+						setValue={setName}
+					/>
+					<CustomInput
+						id="inputId"
+						label="아이디"
+						value={username}
+						setValue={setUsername}
+					/>
+					<CustomInput
+						id="inputPwd"
+						label="비밀번호"
+						value={password}
+						setValue={setPassword}
+						type="password"
+					/>
+					<CustomInput 
+						id="inpuChk"
+						label="비밀번호 확인"
+						value={passwordChk}
+						setValue={setPasswordChk}
+						type="password"
+					/>
 
-				<button type="submit">회원가입</button>
-			</form>
+					<SubmitBtn type="submit">회원가입</SubmitBtn>
+				</form>
+			</div>
 		</Wrap>
 	)
 }

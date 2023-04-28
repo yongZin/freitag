@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import UploadForm from "../components/UploadForm";
 import Product from "../components/Product";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
 const ADMIN_ID = process.env.REACT_APP_ADMIN_ID; //관리자 확인용
+const GUEST_ID = process.env.REACT_APP_GUEST_ID; //게스트 확인용
 
+const Wrap = styled.div`
+  transition:0.1s;
+`;
 const TitleExBold = styled.h2`
   font-size:50px;
   color:#111;
@@ -18,35 +21,18 @@ const TitleBold = styled.h3`
 
   const MainPage = () =>{
     const [me] = useContext(AuthContext);
-    const [power, setPower] = useState();
-
-    useEffect(() => {
-      const sessionId = localStorage.getItem("sessionId");
-
-      if(me) {
-        if(sessionId){
-          axios
-            .get(
-              "/users/me",
-              {headers: { sessionid: sessionId }}
-            )
-            .then((result) => setPower(result.data.userId))
-            .catch((err) => console.error(err));
-        }
-      }
-    }, [me]);
     
 	return(
-		<div>
+		<Wrap className="wrap">
 			<TitleExBold>F203 BOB</TitleExBold>
       <TitleBold>TOTE BAG MEDIUM</TitleBold>
-      
-      {me && power === ADMIN_ID &&
+
+      {me && ((me.userId) === ADMIN_ID || (me.userId) === GUEST_ID) &&
         <UploadForm />
       }
-
+      
 			<Product />
-		</div>
+		</Wrap>
 	)
 }
 

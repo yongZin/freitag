@@ -69,8 +69,9 @@ userRouter.patch("/logout", async (req, res) => { //로그아웃 API
 
 userRouter.get("/me", (req, res) => { // 세션id를 가진 유저정보 불러오기
 	try {
-		if(!req.user) throw new Error("권한이 없습니다.");
-
+		// if(!req.user) throw new Error("권한이 없습니다."); //로그아웃시 콘솔 오류뜸
+		if(!req.user) return;
+		
 		res.json({
 			message: "성공",
 			sessionId: req.headers.sessionid,
@@ -83,14 +84,17 @@ userRouter.get("/me", (req, res) => { // 세션id를 가진 유저정보 불러�
 	}
 });
 
-// userRouter.get("/me/images", (req, res) => {
-// 	// 본인의 사진만 리턴(admin)
-// 	try {
+userRouter.get("/me/images", async (req, res) => {
+	try {
+		// if(!req.user) throw new Error("권한이 없습니다.");
 		
-// 	} catch (err) {
-// 		console.log(err);
-// 		res.status(400).json({ message: err.message });
-// 	}
-// })
+		const images = await Image.find({ "user._id": req.user.id });
+		
+		res.json(images);
+	} catch (err) {
+		console.log(err);
+		res.status(400).json({ message: err.message });
+	}
+})
 
 module.exports = { userRouter };

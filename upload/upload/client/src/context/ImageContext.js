@@ -9,6 +9,7 @@ export const ImageProvider = (prop) => {
 	const [imageLoad, setImageLoad] = useState(false);
 	const [imageError, setImageError] = useState(false);
 	const pastImageUrlRef = useRef();
+	
 
 	useEffect(() => {
 		if(pastImageUrlRef.current === imageUrl) return;
@@ -32,7 +33,6 @@ export const ImageProvider = (prop) => {
 		
 	// 	setImageUrl(`/images?lastid=${lastImageId}`);
 	// },[lastImageId, imageLoad]);
-
 	
 	return (
 		<ImageContext.Provider value={{images, setImages, imageLoad, imageError, setImageUrl}}>

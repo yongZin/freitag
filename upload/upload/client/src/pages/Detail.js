@@ -9,6 +9,17 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const ADMIN_ID = process.env.REACT_APP_ADMIN_ID; //관리자 확인용
+const GUEST_ID = process.env.REACT_APP_GUEST_ID; //게스트 확인용
+
+const Wrap = styled.div`
+	text-align:center;
+	transition:0.1s;
+	img{
+		width:50%;
+		max-width:450px;
+		margin-bottom:15px;
+	}
+`;
 
 const BthCont = styled.div`
 	display:flex;
@@ -63,6 +74,7 @@ const Detail = () => {
 	const {images, setImages} = useContext(ImageContext); //이미지정보 가져오기
 	const [error, setError] = useState(false);
 	const [image, setImage] = useState();
+	const [guest, setGuest] = useState();
 
 	useEffect(() => { //images 배열이 바뀔때 마다 이미지 가져오기
 		const img = images.find((image) => image._id === imageId); //이미지 가져오기
@@ -77,6 +89,7 @@ const Detail = () => {
 				.then(({ data }) => {
 					setImage(data);
 					setError(false);
+					setGuest(data.user._id);
 				})
 				.catch((err) => {
 					setError(true);
@@ -127,11 +140,9 @@ const Detail = () => {
 			/>
 		)
 	})
-
+	
 	return(
-		<div>
-			{detailImg}
-
+		<Wrap className="wrap">
 			<BthCont>
 				<LikeBth onClick={onSubmit}>
 					{hasLiked ? <AiFillHeart style={{color: "red"}} /> : <AiOutlineHeart />}
@@ -139,11 +150,20 @@ const Detail = () => {
 					{image.likes.length}
 				</LikeBth>
 
-				{me && ADMIN_ID === me.userId &&
+				{me && 
+					(
+						(me.userId) === ADMIN_ID
+						|| (((me.userId) === guest) && ((me.userId) === GUEST_ID))
+					) &&
 					<DelBth onClick={deleteHandler}>삭제</DelBth>
-				}{/* 유저정보가 관리자일 경우이만 삭제버튼 보이기  */}
+				}
+				{/* 관리자는 모든 이미지 삭제권한 부여 */}
+				{/* 게스트는 본인이 올린 이미지만 삭제권한 부여 */}
+
 			</BthCont>
-		</div>
+
+			{detailImg}
+		</Wrap>
 	)
 }
 

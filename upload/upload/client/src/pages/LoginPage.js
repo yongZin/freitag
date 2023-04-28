@@ -8,9 +8,87 @@ import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
 	width:100%;
-	max-width:350px;
-	margin:100px auto 0;
+	>div{
+		width:100%;
+		max-width:350px;
+		margin:15vh auto 0;
+	}
+	h3{
+		margin-bottom:40px;
+		text-align:center;
+		font-size:30px;
+	}
 `;
+
+const SubmitBtn = styled.button`
+	width:100%;
+	height:48px;
+	margin-top:10px;
+	font-size:16px;
+	border:0;
+	border-radius:5px;
+	color:#fff;
+	background-color:#333;
+	transition:0.3s;
+	&:hover{
+		background-color:#555;
+	}
+`;
+
+const GuestForm = styled.form`
+	text-align:right;
+	button{
+		margin-top:10px;
+		font-size:14px;
+		color:#777;
+		border:0;
+		border-bottom:1px solid #888;
+		background-color:transparent;
+		position:relative;
+		&::before{
+			content:"다양한 기능 사용이 가능합니다.";
+			width:100%;
+			padding:10px 0;
+			line-height:1.3;
+			font-size:13px;
+			font-family:var(--f-reular);
+			letter-spacing:0.4px;
+			word-break:keep-all;
+			border-radius:8px;
+			background-color:#e1e1e1;
+			position:absolute;
+			top:20px;
+			right:0;
+			pointer-events:none;
+			transition:0.3s;
+			opacity:0;
+		}
+		&::after{
+			content:"";
+			border-left:8px solid transparent;
+			border-right:8px solid transparent;
+			border-bottom:8px solid #e1e1e1;
+			position:absolute;
+			top:14px;
+			right:calc(50% - 8px);
+			pointer-events:none;
+			transition:0.3s;
+			opacity:0;
+		}
+		&:hover{
+			&::before{
+				top:32px;
+				opacity:1;
+			}
+			&::after{
+				top:26px;
+				opacity:1;
+			}
+		}
+	}
+`;
+
+
 
 const LoginPage = () => {
 	const [username, setUsername] = useState("");
@@ -43,25 +121,39 @@ const LoginPage = () => {
 		}
 	}
 
+	const guestHandler = () => {
+		setUsername("guest");
+		setPassword("superguest");
+	}
+
 	return(
 		<Wrap>
-			<h3>Login</h3>
+			<div>
 
-			<form onSubmit={loginHandler}>
-				<CustomInput 
-					label="아이디"
-					value={username}
-					setValue={setUsername}
-				/>
-				<CustomInput 
-					label="비밀번호"
-					value={password}
-					setValue={setPassword}
-					type="password"
-				/>
+				<h3>로그인</h3>
 
-				<button type="submit">로그인</button>
-			</form>
+				<form onSubmit={loginHandler}>
+					<CustomInput 
+						id="inputId"
+						label="아이디"
+						value={username}
+						setValue={setUsername}
+					/>
+					<CustomInput
+						id="inputPwd"
+						label="비밀번호"
+						value={password}
+						setValue={setPassword}
+						type="password"
+					/>
+
+					<SubmitBtn type="submit">로그인</SubmitBtn>
+				</form>
+
+				<GuestForm onSubmit={loginHandler}>
+					<button type="submit" onClick={guestHandler}>관리자 권한으로 로그인</button>
+				</GuestForm>
+			</div>
 		</Wrap>
 	)
 }
